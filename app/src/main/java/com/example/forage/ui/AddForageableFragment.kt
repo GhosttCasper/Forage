@@ -50,7 +50,7 @@ class AddForageableFragment : Fragment() {
 
     private val viewModel: ForageableViewModel by activityViewModels {
         ForageableViewModelFactory(
-            (activity?.application as BaseApplication).database.ForageableDao()
+            (activity?.application as BaseApplication).database.forageableDao()
         )
     }
 

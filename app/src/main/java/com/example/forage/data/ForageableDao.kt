@@ -25,18 +25,18 @@ import kotlinx.coroutines.flow.Flow
 @Dao
 interface ForageableDao {
 
-    @Query("SELECT * from forageable_database ORDER BY name ASC")
+    @Query("SELECT * FROM forageable_database ORDER BY name ASC")
     fun getForageables(): Flow<List<Forageable>>
 
-    @Query("SELECT * from forageable_database WHERE id=:id")
+    @Query("SELECT * FROM forageable_database WHERE id = :id")
     fun getForageable(id: Long): Flow<Forageable>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insert(forageable: Forageable)
+    suspend fun insert(forageable: Forageable)
 
     @Update
-    fun update(forageable: Forageable)
+    suspend fun update(forageable: Forageable)
 
     @Delete
-    fun delete(forageable: Forageable)
+    suspend fun delete(forageable: Forageable)
 }

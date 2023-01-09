@@ -21,9 +21,7 @@ import androidx.test.espresso.action.ViewActions.click
 import androidx.test.espresso.action.ViewActions.replaceText
 import androidx.test.espresso.assertion.ViewAssertions.doesNotExist
 import androidx.test.espresso.assertion.ViewAssertions.matches
-import androidx.test.espresso.matcher.ViewMatchers.isDisplayed
-import androidx.test.espresso.matcher.ViewMatchers.withId
-import androidx.test.espresso.matcher.ViewMatchers.withText
+import androidx.test.espresso.matcher.ViewMatchers.*
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import org.junit.Before
 import org.junit.Test
@@ -34,6 +32,7 @@ import org.junit.runner.RunWith
  */
 @RunWith(AndroidJUnit4::class)
 class PersistenceInstrumentationTests {
+    private val isRunAllTests = true
 
     @Before
     fun setup() {
@@ -50,6 +49,12 @@ class PersistenceInstrumentationTests {
     fun new_forageable_is_displayed_in_list() {
         onView(withText("Name")).check(matches(isDisplayed()))
         onView(withText("Address")).check(matches(isDisplayed()))
+
+        if (isRunAllTests) {
+            onView(withText("Name")).perform(click())
+            onView(withId(R.id.edit_forageable_fab)).perform(click())
+            onView(withId(R.id.delete_btn)).perform(click())
+        }
     }
 
     @Test
@@ -59,6 +64,11 @@ class PersistenceInstrumentationTests {
         onView(withText("Address")).check(matches(isDisplayed()))
         onView(withText(("Currently out of season"))).check(matches(isDisplayed()))
         onView(withText("Notes")).check(matches(isDisplayed()))
+
+        if (isRunAllTests) {
+            onView(withId(R.id.edit_forageable_fab)).perform(click())
+            onView(withId(R.id.delete_btn)).perform(click())
+        }
     }
 
     @Test
@@ -77,6 +87,11 @@ class PersistenceInstrumentationTests {
         onView(withText("New Address")).check(matches(isDisplayed()))
         onView(withText(("Currently in season"))).check(matches(isDisplayed()))
         onView(withText("New Notes")).check(matches(isDisplayed()))
+
+        if (isRunAllTests) {
+            onView(withId(R.id.edit_forageable_fab)).perform(click())
+            onView(withId(R.id.delete_btn)).perform(click())
+        }
     }
 
     @Test
